@@ -19,42 +19,26 @@ MonoBehaviour:
   m_DismissPreviewPackagesInUse: 0
   oneTimeWarningShown: 0
   oneTimePackageErrorsPopUpShown: 0
-<<<<<<< HEAD
   m_MainRegistry:
     m_Id: main
-=======
-  m_Registries:
-  - m_Id: main
->>>>>>> 156a8ef790a8a78978357cb5896ad4d636bc07fb
     m_Name: 
     m_Url: https://packages.unity.com
     m_Scopes: []
     m_IsDefault: 1
-<<<<<<< HEAD
     m_IsUnityRegistry: 1
-=======
->>>>>>> 156a8ef790a8a78978357cb5896ad4d636bc07fb
     m_Capabilities: 7
     m_ConfigSource: 0
     m_Compliance:
       m_Status: 0
       m_Violations: []
-<<<<<<< HEAD
   m_ScopedRegistries: []
-=======
->>>>>>> 156a8ef790a8a78978357cb5896ad4d636bc07fb
   m_UserSelectedRegistryName: 
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:
     m_Modified: 0
     m_ErrorMessage: 
-<<<<<<< HEAD
     m_UserModificationsEntityId:
-      m_rawData: 568105589213756488
+      m_rawData: 568105589213756512
     m_OriginalEntityId:
-      m_rawData: 568105589213756486
-=======
-    m_UserModificationsInstanceId: -924
-    m_OriginalInstanceId: -926
->>>>>>> 156a8ef790a8a78978357cb5896ad4d636bc07fb
+      m_rawData: 568105589213756510
   m_LoadAssets: 0
