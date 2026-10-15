@@ -200,3 +200,4 @@ params: {
 [2026-10-15T15:19:45.776Z][INFO] packages:get-packageinfo --> 200 (444 ms)
 [2026-10-15T15:19:45.785Z][INFO] packages:get-packageinfo --> 200 (627 ms)
 [2026-10-15T15:19:45.788Z][INFO] packages:get-packageinfo --> 200 (469 ms)
+[2026-10-15T15:21:09.421Z][INFO] Received shutdown request (SIGTERM), shutting down Unity Package Manager
