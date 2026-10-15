@@ -202,3 +202,9 @@ Domain Reload Profiling: 2586ms
 AcceleratorClientConnectionCallback - disconnected - :0
 Launching external process: /Applications/Unity/Hub/Editor/6000.5.5f1/Unity.app/Contents/Helpers/UnityShaderCompiler
 Launched and connected shader compiler UnityShaderCompiler after 0.45 seconds
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 64 unused Assets / (24.0 KB). Loaded Objects now: 668.
+Memory consumption went from 70.0 MB to 69.9 MB.
+Total: 16.765113 ms (FindLiveObjects: 0.168692 ms CreateObjectMapping: 0.046354 ms MarkObjects: 16.306878 ms  DeleteObjects: 0.240845 ms)
+
+Curl error 3: URL rejected: Error
