@@ -16,3 +16,22 @@ params: {}
 [2026-10-15T15:18:50.616Z][INFO] project:resolve-packages <-- Request received
 params: {}
 [2026-10-15T15:18:53.271Z][INFO] project:resolve-packages --> 200 (2655 ms)
+[2026-10-15T15:19:24.577Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-10-15T15:19:24.704Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-10-15T15:19:24.872Z][INFO] project:list-packages --> 200 (295 ms)
+[2026-10-15T15:19:25.048Z][INFO] project:list-packages --> 200 (344 ms)
+[2026-10-15T15:19:25.122Z][INFO] config:project:get-registries <-- Request received
+params: {}
+[2026-10-15T15:19:25.130Z][INFO] config:project:get-registries --> 200 (8 ms)
+[2026-10-15T15:19:35.026Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-10-15T15:19:35.147Z][INFO] project:list-packages --> 200 (121 ms)
+[2026-10-15T15:19:35.211Z][INFO] project:list-packages <-- Request received
+params: {}
+[2026-10-15T15:19:35.361Z][INFO] project:list-packages --> 200 (150 ms)
+[2026-10-15T15:19:35.745Z][INFO] packages:get-all-packageinfo <-- Request received
+params: {}
+[2026-10-15T15:19:35.759Z][INFO] packages:get-all-packageinfo <-- Request received
+params: {}
