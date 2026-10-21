@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int vidas = 2;
+    public int vidas = 3;
     public int puntos = 0;
     public float tiempo = 60f;
     public bool juegoActivo = true;
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     void ResetearValores()
     {
-        vidas = 2;
+        vidas = 3;
         puntos = 0;
         tiempo = 60f;
     }
