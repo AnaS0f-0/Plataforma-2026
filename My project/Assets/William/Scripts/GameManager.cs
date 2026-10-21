@@ -1,22 +1,19 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-// Este script controla el juego completo
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager instance;
-    public int vidas = 3;
+    public int vidas = 2;
     public int puntos = 0;
-    public float tiempo = 120f;
-
-    // Para saber si el juego esta pausado
+    public float tiempo = 60f;
     public bool juegoActivo = true;
+
+    private UIManager uiManager;
 
     void Awake()
     {
-        // Si ya existe un GameManager no creamos otro
         if (instance != null)
         {
             Destroy(gameObject);
@@ -24,64 +21,66 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject); // que no se destruya al cambiar escena
+        DontDestroyOnLoad(gameObject);
+        uiManager = FindObjectOfType<UIManager>();
+        
+        ResetearValores();
     }
 
     void Update()
     {
-        // Si el juego no esta activo no hacemos nada
         if (!juegoActivo) return;
 
-        // Bajar el tiempo poco a poco
         tiempo -= Time.deltaTime;
 
-        // Si se acabo el tiempo el jugador pierde
         if (tiempo <= 0)
         {
             tiempo = 0;
             OnPlayerLose();
         }
 
-        // Pausar con Escape
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            PauseGame();
+            if (juegoActivo)
+                PauseGame();
+            else
+                ResumeGame();
         }
     }
 
-    // Pausa el juego
     public void PauseGame()
     {
         juegoActivo = false;
-        Time.timeScale = 0; // congela todo
-        Debug.Log("Juego pausado");
+        Time.timeScale = 0;
+        
+        if (uiManager != null)
+            uiManager.MostrarPausa();
     }
 
-    // Reanuda el juego
     public void ResumeGame()
     {
         juegoActivo = true;
-        Time.timeScale = 1; // vuelve a la velocidad normal
-        Debug.Log("Juego reanudado");
+        Time.timeScale = 1;
     }
 
-    // El jugador gano
     public void OnPlayerWin()
     {
         juegoActivo = false;
         Time.timeScale = 0;
-        Debug.Log("Ganaste!");
+        
+        if (uiManager != null)
+            uiManager.MostrarVictoria();
     }
 
-    // El jugador perdio
     public void OnPlayerLose()
     {
         juegoActivo = false;
         Time.timeScale = 0;
-        Debug.Log("Perdiste!");
+        
+        if (uiManager != null)
+            uiManager.MostrarGameOver();
     }
 
-    // Carga una escena por nombre
     public void LoadScene(string nombreEscena)
     {
         Time.timeScale = 1;
@@ -90,32 +89,31 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(nombreEscena);
     }
 
-    // Reinicia el nivel actual
     public void RestartCurrentLevel()
     {
+        Time.timeScale = 1;
+        juegoActivo = true;
+        ResetearValores();
+        
         string escenaActual = SceneManager.GetActiveScene().name;
-        LoadScene(escenaActual);
+        SceneManager.LoadScene(escenaActual);
     }
 
-    // Vuelve al menu principal
     public void QuitToMainMenu()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        RestartCurrentLevel();
     }
 
-    // Suma puntos al marcador
     public void SumarPuntos(int cantidad)
     {
         puntos += cantidad;
-        Debug.Log("Puntos: " + puntos);
     }
 
-    // Reinicia las variables al valor inicial
     void ResetearValores()
     {
-        vidas = 3;
+        vidas = 2;
         puntos = 0;
-        tiempo = 120f;
+        tiempo = 60f;
     }
 }

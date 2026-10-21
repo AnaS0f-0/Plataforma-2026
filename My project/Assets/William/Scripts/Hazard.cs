@@ -1,52 +1,58 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-// Este script va en las trampas del nivel  
-// Cuando el jugador las toca recibe daño
- 
 public class Hazard : MonoBehaviour
 {
-    // Cuanto daño hace esta trampa
-    public int daño = 20;
-
-    // Para que no haga daño muchas veces seguidas
-    // Tiempo que hay que esperar entre cada golpe
+    public int daño = 50;
     public float tiempoEntreGolpes = 1f;
+    public float radioDeteccion = 0.5f;
 
-    // Variable interna para contar el tiempo
     private float tiempoUltimoGolpe = 0f;
+    private Tilemap tilemap;
+    private Grid grid;
+    private PlayerStats playerStats;
+    private Transform playerTransform;
 
-    void OnTriggerEnter2D(Collider2D otro)
+    void Start()
     {
-        // Solo reaccionar si lo toca el jugador
-        if (!otro.CompareTag("Player")) return;
+        tilemap = GetComponent<Tilemap>();
+        grid = GetComponentInParent<Grid>();
 
-        AplicarDanio(otro);
-    }
-
-    void OnTriggerStay2D(Collider2D otro)
-    {
-        // Si el jugador sigue adentro, hacerle daño cada cierto tiempo
-        if (!otro.CompareTag("Player")) return;
-
-        // Ver si ya paso suficiente tiempo desde el ultimo golpe
-        if (Time.time - tiempoUltimoGolpe >= tiempoEntreGolpes)
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
         {
-            AplicarDanio(otro);
+            playerTransform = playerObj.transform;
+            playerStats = playerObj.GetComponent<PlayerStats>();
         }
     }
 
-    // Funcion que aplica el daño al jugador
-    void AplicarDanio(Collider2D otro)
+    void Update()
     {
-        PlayerStats statsJugador = otro.GetComponent<PlayerStats>();
+        if (playerTransform == null || playerStats == null) return;
 
-        if (statsJugador == null) return;
-        if (statsJugador.IsDead()) return;
+        DetectarColision();
+    }
 
-        // Aplicar el daño
-        statsJugador.TakeDamage(daño);
+    void DetectarColision()
+    {
+        Vector3 posJugador = playerTransform.position;
+        Vector3Int cellPos = tilemap.WorldToCell(posJugador);
+        TileBase tile = tilemap.GetTile(cellPos);
+
+        if (tile != null)
+        {
+            if (Time.time - tiempoUltimoGolpe >= tiempoEntreGolpes)
+            {
+                AplicarDanio();
+            }
+        }
+    }
+
+    void AplicarDanio()
+    {
+        if (playerStats == null || playerStats.IsDead()) return;
+
+        playerStats.TakeDamage(daño);
         tiempoUltimoGolpe = Time.time;
-
-        Debug.Log("Trampa hizo daño: " + daño);
     }
 }
