@@ -95,6 +95,9 @@ public class UIManager : MonoBehaviour
             if (textoPuntos == null)
                 textoPuntos = canvasTransform.Find("TextoPuntos")?.GetComponent<TextMeshProUGUI>();
 
+            if (textoTiempo == null)
+                textoTiempo = canvasTransform.Find("TextoTiempo")?.GetComponent<TextMeshProUGUI>();
+
             if (panelPausa == null)
                 panelPausa = canvasTransform.Find("PanelPausa")?.gameObject;
             
