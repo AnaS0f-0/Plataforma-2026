@@ -37,25 +37,63 @@ public class UIManager : MonoBehaviour
 
     void BuscarElementos()
     {
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas == null) return;
+
+        Transform canvasTransform = canvas.transform;
+
         if (textoVidas == null)
-            textoVidas = GameObject.Find("TextoVidas")?.GetComponent<TextMeshProUGUI>();
+            textoVidas = canvasTransform.Find("TextoVidas")?.GetComponent<TextMeshProUGUI>();
         
         if (textoPuntos == null)
-            textoPuntos = GameObject.Find("TextoPuntos")?.GetComponent<TextMeshProUGUI>();
+            textoPuntos = canvasTransform.Find("TextoPuntos")?.GetComponent<TextMeshProUGUI>();
         
         if (textoTiempo == null)
-            textoTiempo = GameObject.Find("TextoTiempo")?.GetComponent<TextMeshProUGUI>();
+            textoTiempo = canvasTransform.Find("TextoTiempo")?.GetComponent<TextMeshProUGUI>();
+
+        if (panelPausa == null)
+            panelPausa = canvasTransform.Find("PanelPausa")?.gameObject;
+        
+        if (panelGameOver == null)
+            panelGameOver = canvasTransform.Find("PanelGameOver")?.gameObject;
+        
+        if (panelVictoria == null)
+            panelVictoria = canvasTransform.Find("PanelVictoria")?.gameObject;
+
+        if (botonReanudar == null)
+            botonReanudar = panelPausa?.transform.Find("BotonReanudar")?.GetComponent<Button>();
+        
+        if (botonReiniciar == null)
+            botonReiniciar = panelPausa?.transform.Find("BotonReiniciar")?.GetComponent<Button>();
+        
+        if (botonMenu == null)
+            botonMenu = panelPausa?.transform.Find("BotonMenu")?.GetComponent<Button>();
     }
 
     void Update()
     {
         if (GameManager.instance == null) return;
 
-        if (textoVidas == null)
-            textoVidas = GameObject.Find("TextoVidas")?.GetComponent<TextMeshProUGUI>();
-        
-        if (textoPuntos == null)
-            textoPuntos = GameObject.Find("TextoPuntos")?.GetComponent<TextMeshProUGUI>();
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas != null)
+        {
+            Transform canvasTransform = canvas.transform;
+
+            if (textoVidas == null)
+                textoVidas = canvasTransform.Find("TextoVidas")?.GetComponent<TextMeshProUGUI>();
+            
+            if (textoPuntos == null)
+                textoPuntos = canvasTransform.Find("TextoPuntos")?.GetComponent<TextMeshProUGUI>();
+
+            if (panelPausa == null)
+                panelPausa = canvasTransform.Find("PanelPausa")?.gameObject;
+            
+            if (panelGameOver == null)
+                panelGameOver = canvasTransform.Find("PanelGameOver")?.gameObject;
+            
+            if (panelVictoria == null)
+                panelVictoria = canvasTransform.Find("PanelVictoria")?.gameObject;
+        }
 
         if (textoVidas != null)
         {
