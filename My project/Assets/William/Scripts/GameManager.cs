@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int vidas = 3;
+    public int vidas = 2;
     public int puntos = 0;
     public float tiempo = 60f;
     public bool juegoActivo = true;
@@ -24,12 +24,17 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         uiManager = FindObjectOfType<UIManager>();
         
-        ResetearValores();
+        vidas = 2;
+        puntos = 0;
+        tiempo = 60f;
     }
 
     void Update()
     {
         if (!juegoActivo) return;
+
+        if (uiManager == null)
+            uiManager = FindObjectOfType<UIManager>();
 
         tiempo -= Time.deltaTime;
 
@@ -93,7 +98,9 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         juegoActivo = true;
-        ResetearValores();
+        
+        puntos = 0;
+        tiempo = 60f;
         
         string escenaActual = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(escenaActual);
@@ -112,7 +119,7 @@ public class GameManager : MonoBehaviour
 
     void ResetearValores()
     {
-        vidas = 3;
+        vidas = 2;
         puntos = 0;
         tiempo = 60f;
     }

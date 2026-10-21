@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571e2023908644b9999658866d1377d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  vidas: 3
+  vidas: 2
   puntos: 0
   tiempo: 60
   juegoActivo: 1

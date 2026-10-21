@@ -10,6 +10,7 @@ public class FallDetector : MonoBehaviour
     void Start()
     {
         statsJugador = GetComponent<PlayerStats>();
+        yaDetectoLaCaida = false;
     }
 
     void Update()
@@ -18,6 +19,11 @@ public class FallDetector : MonoBehaviour
         {
             yaDetectoLaCaida = true;
             DetectarCaida();
+        }
+
+        if (transform.position.y >= alturaMinima)
+        {
+            yaDetectoLaCaida = false;
         }
     }
 

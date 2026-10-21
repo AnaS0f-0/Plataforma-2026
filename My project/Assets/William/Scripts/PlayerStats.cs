@@ -15,13 +15,16 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-        vidaMaxima = vidasMaximas * saludPorVida;
-        vidaActual = vidaMaxima;
-        
         uiManager = FindObjectOfType<UIManager>();
-
+        
+        int vidasActualesEnGameManager = 2;
         if (GameManager.instance != null)
-            GameManager.instance.vidas = vidasMaximas;
+        {
+            vidasActualesEnGameManager = GameManager.instance.vidas;
+        }
+        
+        vidaMaxima = vidasActualesEnGameManager * saludPorVida;
+        vidaActual = vidaMaxima;
 
         ActualizarUI();
     }
@@ -97,7 +100,8 @@ public class PlayerStats : MonoBehaviour
 
     public int ObtenerVidasRestantes()
     {
-        return Mathf.CeilToInt((float)vidaActual / saludPorVida);
+        if (vidaActual <= 0) return 0;
+        return (vidaActual + saludPorVida - 1) / saludPorVida;
     }
 
     void ActualizarUI()
@@ -108,7 +112,7 @@ public class PlayerStats : MonoBehaviour
         if (GameManager.instance != null)
         {
             int vidasRestantes = ObtenerVidasRestantes();
-            GameManager.instance.vidas = Mathf.Max(0, vidasRestantes);
+            GameManager.instance.vidas = vidasRestantes;
         }
     }
 }

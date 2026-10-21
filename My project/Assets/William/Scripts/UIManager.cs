@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
     {
         OcultarPaneles();
 
+        BuscarElementos();
+
         if (botonReanudar != null)
             botonReanudar.onClick.AddListener(ClickReanudar);
 
@@ -33,15 +35,37 @@ public class UIManager : MonoBehaviour
             botonMenu.onClick.AddListener(ClickMenu);
     }
 
+    void BuscarElementos()
+    {
+        if (textoVidas == null)
+            textoVidas = GameObject.Find("TextoVidas")?.GetComponent<TextMeshProUGUI>();
+        
+        if (textoPuntos == null)
+            textoPuntos = GameObject.Find("TextoPuntos")?.GetComponent<TextMeshProUGUI>();
+        
+        if (textoTiempo == null)
+            textoTiempo = GameObject.Find("TextoTiempo")?.GetComponent<TextMeshProUGUI>();
+    }
+
     void Update()
     {
         if (GameManager.instance == null) return;
 
+        if (textoVidas == null)
+            textoVidas = GameObject.Find("TextoVidas")?.GetComponent<TextMeshProUGUI>();
+        
+        if (textoPuntos == null)
+            textoPuntos = GameObject.Find("TextoPuntos")?.GetComponent<TextMeshProUGUI>();
+
         if (textoVidas != null)
+        {
             textoVidas.text = "Vidas: " + GameManager.instance.vidas;
+        }
 
         if (textoPuntos != null)
+        {
             textoPuntos.text = "Puntos: " + GameManager.instance.puntos;
+        }
 
         if (textoTiempo != null)
         {
