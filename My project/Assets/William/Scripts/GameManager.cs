@@ -106,10 +106,23 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(escenaActual);
     }
 
+    public void RestartFromButton()
+    {
+        Time.timeScale = 1;
+        juegoActivo = true;
+        
+        vidas = 2;
+        puntos = 0;
+        tiempo = 60f;
+        
+        string escenaActual = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(escenaActual);
+    }
+
     public void QuitToMainMenu()
     {
         Time.timeScale = 1;
-        RestartCurrentLevel();
+        RestartFromButton();
     }
 
     public void SumarPuntos(int cantidad)

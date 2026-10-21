@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
@@ -22,17 +25,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         OcultarPaneles();
-
         BuscarElementos();
-
-        if (botonReanudar != null)
-            botonReanudar.onClick.AddListener(ClickReanudar);
-
-        if (botonReiniciar != null)
-            botonReiniciar.onClick.AddListener(ClickReiniciar);
-
-        if (botonMenu != null)
-            botonMenu.onClick.AddListener(ClickMenu);
     }
 
     void BuscarElementos()
@@ -60,14 +53,31 @@ public class UIManager : MonoBehaviour
         if (panelVictoria == null)
             panelVictoria = canvasTransform.Find("PanelVictoria")?.gameObject;
 
-        if (botonReanudar == null)
-            botonReanudar = panelPausa?.transform.Find("BotonReanudar")?.GetComponent<Button>();
-        
-        if (botonReiniciar == null)
-            botonReiniciar = panelPausa?.transform.Find("BotonReiniciar")?.GetComponent<Button>();
-        
-        if (botonMenu == null)
-            botonMenu = panelPausa?.transform.Find("BotonMenu")?.GetComponent<Button>();
+        BuscarBotones(canvasTransform);
+    }
+
+    void BuscarBotones(Transform canvasTransform)
+    {
+        Transform boton = canvasTransform.Find("PanelPausa/BotonReanudar");
+        if (boton == null)
+            boton = canvasTransform.Find("PanelGameOver/BotonReanudar");
+        if (boton == null)
+            boton = canvasTransform.Find("PanelVictoria/BotonReanudar");
+        botonReanudar = boton?.GetComponent<Button>();
+
+        boton = canvasTransform.Find("PanelPausa/BotonReiniciar");
+        if (boton == null)
+            boton = canvasTransform.Find("PanelGameOver/BotonReiniciar");
+        if (boton == null)
+            boton = canvasTransform.Find("PanelVictoria/BotonReiniciar");
+        botonReiniciar = boton?.GetComponent<Button>();
+
+        boton = canvasTransform.Find("PanelPausa/BotonMenu");
+        if (boton == null)
+            boton = canvasTransform.Find("PanelGameOver/BotonMenu");
+        if (boton == null)
+            boton = canvasTransform.Find("PanelVictoria/BotonMenu");
+        botonMenu = boton?.GetComponent<Button>();
     }
 
     void Update()
@@ -93,6 +103,8 @@ public class UIManager : MonoBehaviour
             
             if (panelVictoria == null)
                 panelVictoria = canvasTransform.Find("PanelVictoria")?.gameObject;
+
+            BuscarBotones(canvasTransform);
         }
 
         if (textoVidas != null)
@@ -111,6 +123,44 @@ public class UIManager : MonoBehaviour
             int minutos = (int)(t / 60);
             int segundos = (int)(t % 60);
             textoTiempo.text = minutos + ":" + segundos.ToString("00");
+        }
+
+        DetectarClicsBotones();
+    }
+
+    void DetectarClicsBotones()
+    {
+        if (Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame)
+            return;
+
+        if (EventSystem.current == null)
+            return;
+
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = Mouse.current.position.ReadValue();
+        
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            string buttonName = result.gameObject.name;
+            
+            if (buttonName == "BotonReanudar")
+            {
+                ClickReanudar();
+                return;
+            }
+            else if (buttonName == "BotonReiniciar")
+            {
+                ClickReiniciar();
+                return;
+            }
+            else if (buttonName == "BotonMenu")
+            {
+                ClickMenu();
+                return;
+            }
         }
     }
 
@@ -156,17 +206,20 @@ public class UIManager : MonoBehaviour
 
     void ClickReanudar()
     {
+        Time.timeScale = 1;
         GameManager.instance.ResumeGame();
         OcultarPaneles();
     }
 
     void ClickReiniciar()
     {
-        GameManager.instance.RestartCurrentLevel();
+        Time.timeScale = 1;
+        GameManager.instance.RestartFromButton();
     }
 
     void ClickMenu()
     {
+        Time.timeScale = 1;
         GameManager.instance.QuitToMainMenu();
     }
 }
