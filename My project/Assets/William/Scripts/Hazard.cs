@@ -5,18 +5,15 @@ public class Hazard : MonoBehaviour
 {
     public int daño = 50;
     public float tiempoEntreGolpes = 1f;
-    public float radioDeteccion = 0.5f;
 
-    private float tiempoUltimoGolpe = 0f;
+    private float tiempoDesdeUltimoGolpe = 0f;
     private Tilemap tilemap;
-    private Grid grid;
     private PlayerStats playerStats;
     private Transform playerTransform;
 
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
-        grid = GetComponentInParent<Grid>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -30,6 +27,7 @@ public class Hazard : MonoBehaviour
     {
         if (playerTransform == null || playerStats == null) return;
 
+        tiempoDesdeUltimoGolpe += Time.deltaTime;
         DetectarColision();
     }
 
@@ -39,12 +37,9 @@ public class Hazard : MonoBehaviour
         Vector3Int cellPos = tilemap.WorldToCell(posJugador);
         TileBase tile = tilemap.GetTile(cellPos);
 
-        if (tile != null)
+        if (tile != null && tiempoDesdeUltimoGolpe >= tiempoEntreGolpes)
         {
-            if (Time.time - tiempoUltimoGolpe >= tiempoEntreGolpes)
-            {
-                AplicarDanio();
-            }
+            AplicarDanio();
         }
     }
 
@@ -53,6 +48,6 @@ public class Hazard : MonoBehaviour
         if (playerStats == null || playerStats.IsDead()) return;
 
         playerStats.TakeDamage(daño);
-        tiempoUltimoGolpe = Time.time;
+        tiempoDesdeUltimoGolpe = 0f;
     }
 }
