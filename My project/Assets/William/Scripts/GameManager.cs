@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         
         vidas = 2;
         puntos = 0;
-        tiempo = 60f;
+        tiempo = 95f;
     }
 
     void Update()
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         juegoActivo = true;
         
         puntos = 0;
-        tiempo = 60f;
+        tiempo = 95f;
         
         string escenaActual = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(escenaActual);
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         
         vidas = 2;
         puntos = 0;
-        tiempo = 60f;
+        tiempo = 95f;
         
         string escenaActual = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(escenaActual);
@@ -134,6 +134,6 @@ public class GameManager : MonoBehaviour
     {
         vidas = 2;
         puntos = 0;
-        tiempo = 60f;
+        tiempo = 95f;
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ScoreCollector : MonoBehaviour
 {
-    public int puntosParaGanar = 100;
+    public int puntosParaGanar = 200;
     public GameObject meta;
 
     private bool metaDesbloqueada = false;
