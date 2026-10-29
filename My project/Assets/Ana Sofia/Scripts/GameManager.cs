@@ -10,4 +10,25 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+
+    public void SalirDelJuego()
+    {
+        Application.Quit();
+    }
+
+    public void PausarElJuego()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void ReanudarElJuego()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void ReiniciarElJuego()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
 }
