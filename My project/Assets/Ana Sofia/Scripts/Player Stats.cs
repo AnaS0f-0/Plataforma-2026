@@ -1,10 +1,18 @@
+using Unity.VectorGraphics;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private int _puntosVida = 100;
     [SerializeField] private int _vidaMaxima = 100;
     [SerializeField] private float vidaActual;
+    [SerializeField] private UiManager _uiManager;
+    [SerializeField] public GameObject panelDerrota;
+    [SerializeField] private GameManager GameManager;
+    public GameManager gameManager;
+
 
 
 
@@ -18,4 +26,27 @@ public class PlayerStats : MonoBehaviour
     {
         _puntosVida = _puntosVida - daño;
     }
+
+
+    public void SumarVida(int daño)
+    {
+    
+       _puntosVida = _puntosVida + daño;
+        if (_puntosVida > _vidaMaxima)
+        {
+            _puntosVida = _vidaMaxima;
+        }
+    }
+    private void Update()
+    {
+
+        if (_puntosVida <= 0)
+        {
+            Time.timeScale = 0;
+            panelDerrota.SetActive(true);
+        }
+    }
+
+
+
 }
