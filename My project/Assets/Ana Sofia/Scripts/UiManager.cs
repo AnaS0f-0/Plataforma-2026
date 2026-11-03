@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     [SerializeField] private Image _barra;
+    
 
     public void SumarFillAmount(float amount)
     {

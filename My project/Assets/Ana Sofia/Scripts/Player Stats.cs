@@ -11,15 +11,26 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private UiManager _uiManager;
     [SerializeField] public GameObject panelDerrota;
     [SerializeField] private GameManager GameManager;
+  
     public GameManager gameManager;
 
+   
 
+ 
 
-
-    private void Start()
+    public void Start()
     {
+    
         vidaActual = _vidaMaxima;
     }
+
+    public void SumarInvencibilidad(int  vida)
+    {
+        _puntosVida = Mathf.Clamp(_puntosVida + vida, 0, _vidaMaxima);
+    }
+    
+     
+
 
 
     public void RestarVida(int daño)
@@ -30,8 +41,8 @@ public class PlayerStats : MonoBehaviour
 
     public void SumarVida(int daño)
     {
-    
-       _puntosVida = _puntosVida + daño;
+
+        _puntosVida = _puntosVida + daño;
         if (_puntosVida > _vidaMaxima)
         {
             _puntosVida = _vidaMaxima;
@@ -47,6 +58,16 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void sumarVida(int salud)
+    {
+        if (_vidaMaxima >= 30.0f)
+        {
+            return;
+        }
+
+    }
 
 
+
+   
 }
