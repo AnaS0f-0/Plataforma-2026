@@ -7,7 +7,7 @@ public class ItemCollector : MonoBehaviour
     private Transform playerTransform;
     private float tiempoUltimoItem = 0f;
     private float delayEntreItems = 0.3f;
-    private int puntosItem = 20;
+    private int puntosItem = 10;
 
     void Start()
     {
