@@ -5,6 +5,10 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _PaneldeMuerte;
    
+    public void CargarEscena(int scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
 
 
     private void CargarEscenaMuerte(int scene)

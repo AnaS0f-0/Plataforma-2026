@@ -4,6 +4,10 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     [SerializeField] private Image _barra;
+    [SerializeField] private PlayerStats _invencibilidad;
+   
+
+    
     
 
     public void SumarFillAmount(float amount)
@@ -15,6 +19,22 @@ public class UiManager : MonoBehaviour
 
     public void RestarFillAmount(float amount)
     {
-        _barra.fillAmount = _barra.fillAmount - amount;
+
+        if (_invencibilidad == false)
+        {
+            _barra.fillAmount = _barra.fillAmount - amount;
+            return;
+        }
+
+        
+
+       
+
+      
     }
+
+
+    
+
+    
 }
