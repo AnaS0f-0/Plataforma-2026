@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UiManager
   _barra: {fileID: 1602034302}
-  _invencibilidad: {fileID: 0}
+  _invencibilidad: {fileID: 628732572}
 --- !u!4 &44761678
 Transform:
   m_ObjectHideFlags: 0

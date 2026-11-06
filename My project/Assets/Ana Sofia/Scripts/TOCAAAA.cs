@@ -8,7 +8,7 @@ public class TOCAAAA : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         estaEnSuelo = true;
-        Debug.Log("tocó el suelo");
+        Debug.Log("tocÃ³ el suelo");
     }
 
 
