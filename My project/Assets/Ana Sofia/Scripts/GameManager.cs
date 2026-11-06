@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
 
     public void SalirDelJuego()
     {
+#if !UNITY_WEBGL
         Application.Quit();
+#endif
     }
 
     public void PausarElJuego()
