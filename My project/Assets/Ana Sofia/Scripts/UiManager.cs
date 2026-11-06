@@ -20,7 +20,7 @@ public class UiManager : MonoBehaviour
     public void RestarFillAmount(float amount)
     {
 
-        if (_invencibilidad == false)
+        if (_invencibilidad != null && !_invencibilidad._invencibilidad)
         {
             _barra.fillAmount = _barra.fillAmount - amount;
             return;

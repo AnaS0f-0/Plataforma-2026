@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private UiManager _uiManager;
     [SerializeField] public GameObject panelDerrota;
     [SerializeField] public bool _invencibilidad;
-     
+ 
   
     public GameManager gameManager;
    
@@ -37,21 +37,21 @@ public class PlayerStats : MonoBehaviour
 
 
 
-    public void RestarVida(int daño)
+    public void RestarVida(int daÃ±o)
     {
         if (_invencibilidad == false)
         {
-            _puntosVida = _puntosVida - daño;
+            _puntosVida = _puntosVida - daÃ±o;
         }
 
       
     }
 
 
-    public void SumarVida(int daño)
+    public void SumarVida(int daÃ±o)
     {
 
-        _puntosVida = _puntosVida + daño;
+        _puntosVida = _puntosVida + daÃ±o;
         if (_puntosVida > _vidaMaxima)
         {
             _puntosVida = _vidaMaxima;
