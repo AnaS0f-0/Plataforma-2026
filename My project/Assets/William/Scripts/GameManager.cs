@@ -77,6 +77,16 @@ public class GameManager : MonoBehaviour
             uiManager.MostrarVictoria();
     }
 
+    public void CargarSiguienteNivel()
+    {
+        juegoActivo = false;
+        Time.timeScale = 1;
+        // Sacar al GameManager de DontDestroyOnLoad para que no persista en el nivel 2
+        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+        // Índice 1 = SampleScene (nivel 2 de Ana Sofia), según el Build Settings
+        SceneManager.LoadScene(1);
+    }
+
     public void OnPlayerLose()
     {
         juegoActivo = false;

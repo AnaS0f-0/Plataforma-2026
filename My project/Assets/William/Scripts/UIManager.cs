@@ -164,6 +164,11 @@ public class UIManager : MonoBehaviour
                 ClickMenu();
                 return;
             }
+            else if (buttonName == "BotonSiguiente")
+            {
+                ClickSiguiente();
+                return;
+            }
         }
     }
 
@@ -224,5 +229,10 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 1;
         GameManager.instance.QuitToMainMenu();
+    }
+
+    void ClickSiguiente()
+    {
+        GameManager.instance.CargarSiguienteNivel();
     }
 }
